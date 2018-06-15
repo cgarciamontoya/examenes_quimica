@@ -73,10 +73,10 @@ public class CatalogosDAO extends BaseDAO {
         try {
             PreparedStatement ps = null;
             if (respuesta.getId() == 0) {
-                ps =  getConnection().prepareStatement("insert into cat_preguntas (nombre) values (?)");
+                ps =  getConnection().prepareStatement("insert into cat_respuestas (nombre) values (?)");
                 ps.setString(1, respuesta.getNombre().toUpperCase());
             } else {
-                ps = getConnection().prepareStatement("update cat_preguntas set nombre = ? where id = ?");
+                ps = getConnection().prepareStatement("update cat_respuestas set nombre = ? where id = ?");
                 ps.setString(1, respuesta.getNombre().toUpperCase());
                 ps.setInt(2, respuesta.getId());
             }
@@ -89,7 +89,7 @@ public class CatalogosDAO extends BaseDAO {
     public List<CatRespuesta> buscarRespuesta(String nombre) {
         try {
             StringBuilder sb = new StringBuilder();
-            sb.append("select id, nombre from cat_preguntas ");
+            sb.append("select id, nombre from cat_respuestas ");
             if (nombre != null && !nombre.trim().isEmpty()) {
                 sb.append("where nombre like '")
                         .append(nombre.toUpperCase())

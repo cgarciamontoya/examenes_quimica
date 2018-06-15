@@ -46,6 +46,7 @@ public class ExamenesMain extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("EXAMENES QUIMICA");
+        setResizable(false);
 
         menuExamenes.setText("Catálogos");
 
@@ -59,7 +60,7 @@ public class ExamenesMain extends javax.swing.JFrame {
 
         jMenuBar1.add(menuExamenes);
 
-        menuPreguntas.setText("Registro");
+        menuPreguntas.setText("Preguntas");
 
         menuPregAlta.setText("Registro");
         menuPregAlta.addActionListener(new java.awt.event.ActionListener() {
@@ -70,6 +71,11 @@ public class ExamenesMain extends javax.swing.JFrame {
         menuPreguntas.add(menuPregAlta);
 
         mnuPregConsulta.setText("Consulta");
+        mnuPregConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaPreguntas(evt);
+            }
+        });
         menuPreguntas.add(mnuPregConsulta);
 
         jMenuBar1.add(menuPreguntas);
@@ -84,7 +90,7 @@ public class ExamenesMain extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 391, Short.MAX_VALUE)
+            .addGap(0, 474, Short.MAX_VALUE)
         );
 
         pack();
@@ -101,6 +107,12 @@ public class ExamenesMain extends javax.swing.JFrame {
         this.add(pv);
         pv.show();
     }//GEN-LAST:event_altaPreguntas
+
+    private void consultaPreguntas(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPreguntas
+        PreguntasConsultaVista pcv = new PreguntasConsultaVista(connection);
+        this.add(pcv);
+        pcv.show();
+    }//GEN-LAST:event_consultaPreguntas
 
     /**
      * @param args the command line arguments

@@ -31,8 +31,10 @@ public class PreguntasVista extends FormBase {
     private final CatalogosDAO catalogosDAO;
     private final PreguntasDAO preguntasDAO;
     private Pregunta pregunta;
+
     /**
      * Creates new form PreguntasVista
+     *
      * @param con
      */
     public PreguntasVista(Connection con) {
@@ -44,32 +46,41 @@ public class PreguntasVista extends FormBase {
         lblEditando.setVisible(false);
         initCombos();
     }
-    
-    public PreguntasVista(Connection con, Pregunta pregunta) {
+
+    public PreguntasVista(Connection con, int idPregunta) {
         initComponents();
         this.con = con;
         catalogosDAO = new CatalogosDAO(con);
         preguntasDAO = new PreguntasDAO(con);
-        this.pregunta = pregunta;
+        this.pregunta = preguntasDAO.consultaPreguntaId(idPregunta);
         initCombos();
-        
+
         txtPregunta.setText(pregunta.getPregunta());
         cboUnidad.setSelectedIndex(pregunta.getUnidad());
         cboMaterias.setSelectedItem(pregunta.getMateria().toString());
         cboRespuesta.setSelectedItem(pregunta.getTipoRespuesta().toString());
-        
+
         switch (pregunta.getTipoRespuesta().getId()) {
-            case ConstantesUtil.RESPUESTA_ABIERTA :
-            case ConstantesUtil.RESPUESTA_MAPA :
+            case ConstantesUtil.RESPUESTA_ABIERTA:
+            case ConstantesUtil.RESPUESTA_MAPA:
                 ((DefaultTableModel) tblOpciones.getModel()).addRow(new Object[]{pregunta.getOpciones()});
                 break;
-            case ConstantesUtil.RESPUESTA_OPCION :
+            case ConstantesUtil.RESPUESTA_OPCION:
                 for (String op : pregunta.getOpciones().split(";")) {
                     ((DefaultTableModel) tblOpciones.getModel()).addRow(new Object[]{op});
                 }
+                break;
+            case ConstantesUtil.RESPUESTA_TABLA :
+                String[] renglones = pregunta.getOpciones().split("#");
+                String[] encabezados = renglones[0].split(";");
+                DefaultTableModel modelTable = new DefaultTableModel(encabezados, 0);
+                for (int i = 1; i < renglones.length; i++) {
+                    modelTable.addRow(renglones[i].split(";"));
+                }
+                tblOpciones.setModel(modelTable);
         }
     }
-    
+
     private void initCombos() {
         List<CatMateria> materias = catalogosDAO.buscarMateria(null);
         DefaultComboBoxModel modelMat = new DefaultComboBoxModel();
@@ -78,7 +89,7 @@ public class PreguntasVista extends FormBase {
             modelMat.addElement(m.toString());
         }
         cboMaterias.setModel(modelMat);
-        
+
         List<CatRespuesta> tiposRespuestas = catalogosDAO.buscarRespuesta(null);
         DefaultComboBoxModel modelRes = new DefaultComboBoxModel();
         modelRes.addElement("Seleccione");
@@ -86,6 +97,10 @@ public class PreguntasVista extends FormBase {
             modelRes.addElement(r.toString());
         }
         cboRespuesta.setModel(modelRes);
+        txtRens.setEnabled(false);
+        txtCols.setEnabled(false);
+        btnLimpiarTbl.setEnabled(false);
+        btnTabla.setEnabled(false);
     }
 
     /**
@@ -115,6 +130,12 @@ public class PreguntasVista extends FormBase {
         btnLimpiar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
         lblEditando = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtRens = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtCols = new javax.swing.JTextField();
+        btnTabla = new javax.swing.JButton();
+        btnLimpiarTbl = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Preguntas");
@@ -128,10 +149,17 @@ public class PreguntasVista extends FormBase {
         jLabel3.setText("Pregunta");
 
         txtPregunta.setColumns(20);
+        txtPregunta.setLineWrap(true);
         txtPregunta.setRows(5);
         jScrollPane1.setViewportView(txtPregunta);
 
         jLabel4.setText("Respuesta");
+
+        cboRespuesta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                configTipoRespuesta(evt);
+            }
+        });
 
         jLabel5.setText("Opciones");
 
@@ -198,6 +226,24 @@ public class PreguntasVista extends FormBase {
         lblEditando.setForeground(new java.awt.Color(255, 0, 51));
         lblEditando.setText("E D I T A N D O . . .");
 
+        jLabel7.setText("Rens");
+
+        jLabel6.setText("Cols");
+
+        btnTabla.setText("Crear");
+        btnTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generarTabla(evt);
+            }
+        });
+
+        btnLimpiarTbl.setText("Limpiar");
+        btnLimpiarTbl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpiarTabla(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -221,20 +267,33 @@ public class PreguntasVista extends FormBase {
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAgregar))
                             .addComponent(cboRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cboMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
                                 .addGap(12, 12, 12)
                                 .addComponent(cboUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1))))
-                .addContainerGap(32, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtRens, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtCols, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnTabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(txtOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnAgregar)
+                                    .addComponent(btnLimpiarTbl))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,8 +318,16 @@ public class PreguntasVista extends FormBase {
                     .addComponent(txtOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAgregar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtRens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtCols, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTabla)
+                    .addComponent(btnLimpiarTbl))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnLimpiar)
@@ -274,6 +341,7 @@ public class PreguntasVista extends FormBase {
 
     private void agregarOpcion(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarOpcion
         if (cboRespuesta.getSelectedIndex() != ConstantesUtil.RESPUESTA_OPCION &&
+                cboRespuesta.getSelectedIndex() != ConstantesUtil.RESPUESTA_TABLA &&
                 tblOpciones.getRowCount() >= 1) {
             agregarMensajeAdvertencia("Para el tipo de respuesta seleccionado, solo se puede agregar una opción");
             return;
@@ -294,8 +362,19 @@ public class PreguntasVista extends FormBase {
             pregunta.getTipoRespuesta().setId(cboRespuesta.getSelectedIndex());
             if (pregunta.getTipoRespuesta().getId() != ConstantesUtil.RESPUESTA_COMPLEMENTAR) {
                 String opcs = "";
-                for (int i = 0; i < tblOpciones.getRowCount(); i++) {
-                    opcs += tblOpciones.getValueAt(i, 0) + ";";
+                if (pregunta.getTipoRespuesta().getId() == ConstantesUtil.RESPUESTA_TABLA) {
+                    for (int i = 0; i < tblOpciones.getRowCount(); i++) {
+                        for (int j = 0; j < tblOpciones.getColumnCount(); j++) {
+                            opcs += (tblOpciones.getValueAt(i, j) != null ? 
+                                    tblOpciones.getValueAt(i, j) : " ")+ ";";
+                        }
+                        opcs += "#";
+                    }
+                } else {
+                    for (int i = 0; i < tblOpciones.getRowCount(); i++) {
+                        opcs += (tblOpciones.getValueAt(i, 0) != null ? 
+                                    tblOpciones.getValueAt(i, 0) : " ")+ ";";
+                    }
                 }
                 pregunta.setOpciones(opcs);
             }
@@ -339,9 +418,16 @@ public class PreguntasVista extends FormBase {
         txtPregunta.setText(null);
         cboRespuesta.setSelectedIndex(0);
         txtOpcion.setText(null);
+        txtRens.setText(null);
+        txtCols.setText(null);
         limpiarTabla(tblOpciones);
     }//GEN-LAST:event_limpiar
 
+    private void initTabla() {
+        if (tblOpciones.getColumnCount() > 1) {
+            tblOpciones.setModel(new DefaultTableModel(new Object[]{"Opción"}, 0));
+        }
+    }
     private void nuevaPregunta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaPregunta
         pregunta = new Pregunta();
         limpiar(null);
@@ -357,12 +443,46 @@ public class PreguntasVista extends FormBase {
         }
     }//GEN-LAST:event_eliminarOpcion
 
+    private void configTipoRespuesta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configTipoRespuesta
+        limpiarTabla(tblOpciones);
+        txtRens.setText(null);
+        txtRens.setEnabled(cboRespuesta.getSelectedIndex() == ConstantesUtil.RESPUESTA_TABLA);
+        txtCols.setEnabled(cboRespuesta.getSelectedIndex() == ConstantesUtil.RESPUESTA_TABLA);
+        btnAgregar.setEnabled(cboRespuesta.getSelectedIndex() != ConstantesUtil.RESPUESTA_TABLA);
+        txtOpcion.setEnabled(cboRespuesta.getSelectedIndex() != ConstantesUtil.RESPUESTA_TABLA);
+        btnLimpiarTbl.setEnabled(cboRespuesta.getSelectedIndex() == ConstantesUtil.RESPUESTA_TABLA);
+        btnTabla.setEnabled(cboRespuesta.getSelectedIndex() == ConstantesUtil.RESPUESTA_TABLA);
+        if (cboRespuesta.getSelectedIndex() != ConstantesUtil.RESPUESTA_TABLA) {
+            initTabla();
+        }
+    }//GEN-LAST:event_configTipoRespuesta
+
+    private void generarTabla(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarTabla
+        try {
+            if (txtCols.getText() != null && !txtCols.getText().isEmpty() &&
+                    txtRens.getText() != null && !txtRens.getText().isEmpty()) {
+                int cols = Integer.parseInt(txtCols.getText());
+                int rens = Integer.parseInt(txtRens.getText());
+                
+                tblOpciones.setModel(new DefaultTableModel(new String[cols], rens));
+            }
+        } catch (NumberFormatException ex) {
+            agregarMensajeError("Los campos Rens y Cols deben ser numéricos");
+        }
+    }//GEN-LAST:event_generarTabla
+
+    private void limpiarTabla(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarTabla
+        initTabla();
+    }//GEN-LAST:event_limpiarTabla
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnLimpiarTbl;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnTabla;
     private javax.swing.JComboBox<String> cboMaterias;
     private javax.swing.JComboBox<String> cboRespuesta;
     private javax.swing.JComboBox<String> cboUnidad;
@@ -371,11 +491,15 @@ public class PreguntasVista extends FormBase {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblEditando;
     private javax.swing.JTable tblOpciones;
+    private javax.swing.JTextField txtCols;
     private javax.swing.JTextField txtOpcion;
     private javax.swing.JTextArea txtPregunta;
+    private javax.swing.JTextField txtRens;
     // End of variables declaration//GEN-END:variables
 }

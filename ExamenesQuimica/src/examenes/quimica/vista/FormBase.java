@@ -5,10 +5,12 @@
  */
 package examenes.quimica.vista;
 
+import examenes.quimica.modelo.CatMateria;
 import java.util.List;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -43,5 +45,13 @@ public class FormBase extends JInternalFrame {
         while (model.getRowCount() > 0) {
             model.removeRow(model.getRowCount() - 1);
         }
+    }
+    
+    public boolean confirmarPregunta(java.awt.event.MouseEvent evt, String mensaje) {
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            int dialogResult =  JOptionPane.showConfirmDialog(null, mensaje, "Advertencia", JOptionPane.YES_NO_OPTION);
+             return dialogResult == JOptionPane.YES_OPTION;
+        }
+        return false;
     }
 }

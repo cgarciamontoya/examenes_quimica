@@ -57,7 +57,7 @@ public class PreguntasDAO extends BaseDAO {
         }
     }
     
-    public List<Pregunta> consultaPreguntas(int materia, int unidad) {
+    public List<Pregunta> consultaPreguntas(Pregunta filtros) {
         try {
             StringBuilder sb = new StringBuilder();
             sb.append("select p.id, p.pregunta, p.opciones, p.unidad, ")
@@ -65,20 +65,34 @@ public class PreguntasDAO extends BaseDAO {
                     .append("m.id id_materia, m.nombre nombre_materia ")
                     .append("from preguntas p inner join cat_respuestas tr on tr.id = p.tipo_respuesta ")
                     .append("inner join cat_materias m on m.id = p.materia ");
-            if (materia > 0) {
-                sb.append("where p.materia = ")
-                        .append(materia)
-                        .append(" ");
-            }
-            if (unidad > 0) {
-                if (sb.toString().contains("where")) {
-                    sb.append("where ");
-                } else {
-                    sb.append("and ");
+            if (filtros != null) {
+                if (filtros.getMateria().getId() > 0) {
+                    sb.append("where p.materia = ")
+                            .append(filtros.getMateria().getId())
+                            .append(" ");
                 }
-                sb.append("p.unidad = ")
-                        .append(unidad)
-                        .append(" ");
+                if (filtros.getUnidad() > 0) {
+                    if (sb.toString().contains("where")) {
+                        sb.append("where ");
+                    } else {
+                        sb.append("and ");
+                    }
+                    sb.append("p.unidad = ")
+                            .append(filtros.getUnidad())
+                            .append(" ");
+                }
+                if (filtros.getTipoRespuesta().getId() > 0) {
+                    sb.append(sb.toString().contains("where") ? "and " : "where ")
+                            .append("p.tipo_respuesta = ")
+                            .append(filtros.getTipoRespuesta().getId())
+                            .append(" ");
+                }
+                if (filtros.getPregunta() != null && !filtros.getPregunta().isEmpty()) {
+                    sb.append(sb.toString().contains("where") ? "and " : "where ")
+                            .append("p.pregunta like '%")
+                            .append(filtros.getPregunta())
+                            .append("%' ");
+                }
             }
             sb.append("order by nombre_materia, unidad, pregunta");
             ResultSet rs = getConnection().prepareStatement(sb.toString()).executeQuery();
