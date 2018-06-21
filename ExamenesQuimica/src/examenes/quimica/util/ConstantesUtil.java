@@ -17,5 +17,10 @@ public class ConstantesUtil {
     public static final int RESPUESTA_MAPA = 3;
     public static final int RESPUESTA_OPCION = 4;
     public static final int RESPUESTA_TABLA = 5;
+    
+    public static final int UNIDAD_ORDINARIO = 5;
+    public static final int UNIDAD_EXTRA = 6;
+    public static final int UNIDAD_TITULO = 7;
+    public static final int UNIDAD_EXTRATITULO = 8;
 
 }

@@ -72,12 +72,8 @@ public class PreguntasDAO extends BaseDAO {
                             .append(" ");
                 }
                 if (filtros.getUnidad() > 0) {
-                    if (sb.toString().contains("where")) {
-                        sb.append("where ");
-                    } else {
-                        sb.append("and ");
-                    }
-                    sb.append("p.unidad = ")
+                    sb.append(sb.toString().contains("where") ? "and " : "where ")
+                            .append("p.unidad = ")
                             .append(filtros.getUnidad())
                             .append(" ");
                 }

@@ -34,6 +34,7 @@ public class CatalogosDAO extends BaseDAO {
         try {
             PreparedStatement ps = null;
             if (materia.getId() == 0) {
+                validarMateria(materia.getNombre().toUpperCase());
                 ps =  getConnection().prepareStatement("insert into cat_materias (nombre) values (?)");
                 ps.setString(1, materia.getNombre().toUpperCase());
             } else {
@@ -45,6 +46,15 @@ public class CatalogosDAO extends BaseDAO {
         } catch (SQLException ex) {
             throw new ExamenesQuimicaException("No fue posible guardar la materia debido a: " + ex.getMessage());
         }             
+    }
+    
+    private void validarMateria(String nombre) throws ExamenesQuimicaException, SQLException {
+        String query = "select count(*) from cat_materias where nombre = '" + nombre + "'";
+        ResultSet rs = getConnection().prepareStatement(query).executeQuery();
+        rs.next();
+        if (rs.getInt(1) > 0) {
+            throw new ExamenesQuimicaException("La materia " + nombre.toUpperCase() + " ya existe!!!");
+        }
     }
     
     public List<CatMateria> buscarMateria(String nombre) {

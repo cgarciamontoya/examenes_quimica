@@ -209,15 +209,22 @@ public class MateriasVista extends FormBase {
             agregarMensajeError("El nombre de la materia es requerido");
             return;
         }
+        boolean nuevo = false;
         if (materiaSeleccionada == null) {
             materiaSeleccionada = new CatMateria(0, txtNombre.getText());
+            nuevo = true;
         } else {
             materiaSeleccionada.setNombre(txtNombre.getText());
         }
         try {
             catalogosDAO.guardarMateria(materiaSeleccionada);
-            tblMaterias.setValueAt(materiaSeleccionada.getNombre().toUpperCase(), 
-                    tblMaterias.getSelectedRow(), 1);
+            if (nuevo) {
+                limpiar(evt);
+                buscarMateria(evt);
+            } else {
+                tblMaterias.setValueAt(materiaSeleccionada.getNombre().toUpperCase(), 
+                        tblMaterias.getSelectedRow(), 1);
+            }
             agregarMensajeExito("La materia fue guardada correctamente");
         } catch (ExamenesQuimicaException ex) {
             agregarMensajeError(ex.getMessage());

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Examen" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="603d7879-5c8b-40eb-a31e-2d9acec6ef0a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["lmfvgo/reportes/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="escudo" class="java.io.InputStream"/>
+	<parameter name="nombre" class="java.lang.String"/>
+	<parameter name="materia" class="java.lang.String"/>
+	<field name="pregunta" class="java.lang.String"/>
+	<field name="respuesta" class="java.util.List"/>
+	<field name="linea" class="java.lang.Integer"/>
+	<field name="lnCampo1" class="java.lang.Integer"/>
+	<field name="lnCampo2" class="java.lang.Integer"/>
+	<field name="lnCampo3" class="java.lang.Integer"/>
+	<field name="lnCampo4" class="java.lang.Integer"/>
+	<field name="lnCampo5" class="java.lang.Integer"/>
+	<field name="lnCampo6" class="java.lang.Integer"/>
+	<field name="lnCampo7" class="java.lang.Integer"/>
+	<field name="lnCampo8" class="java.lang.Integer"/>
+	<field name="lnCampo9" class="java.lang.Integer"/>
+	<field name="lnCampo10" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="78">
+			<image isUsingCache="false">
+				<reportElement x="0" y="0" width="115" height="60" uuid="50436938-e7ce-432a-8927-f657726e6530">
+					<printWhenExpression><![CDATA[new Boolean($P{logo} != null)]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="148" y="0" width="284" height="18" uuid="2503443e-da73-46c1-adc5-e17c09f28672"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[UNIVERSIDAD AUTONOMA DE ZACATECAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="148" y="18" width="284" height="18" uuid="787808fe-4a7d-4b02-83e5-1f2e7a532d36"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA["FRANCISCO GARCIA SALINAS"]]></text>
+			</staticText>
+			<image isUsingCache="false">
+				<reportElement x="457" y="0" width="115" height="60" uuid="067a2a18-f284-4d5f-b1e5-8b9d50a46bf2">
+					<printWhenExpression><![CDATA[new Boolean($P{escudo} != null)]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{escudo}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="148" y="56" width="284" height="20" uuid="7a99fb97-6151-4db0-bb8c-2b473b969b85"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="148" y="38" width="284" height="20" uuid="0fd788dd-9481-464e-8e42-c452f3503ab3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{materia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="27">
+			<staticText>
+				<reportElement x="0" y="0" width="44" height="20" uuid="dd6cf45a-1b86-4fc4-8ac2-b8a6708d0f02"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="48" y="18" width="350" height="1" uuid="a9b0e478-ec3d-4fbe-bc34-90f552a79c4f"/>
+			</line>
+			<staticText>
+				<reportElement x="403" y="0" width="44" height="20" uuid="cb5146f6-7250-4802-ad85-6e78270492e2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Grupo:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="446" y="17" width="125" height="1" uuid="d3bc40ac-3759-4c06-b8f6-173a5462d703"/>
+			</line>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="31">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="571" height="15" uuid="0fa64e07-68d1-46f3-a232-3c942b1a3f37"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pregunta}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="16" width="571" height="15" uuid="54c71479-20cd-4414-9925-590d19f84b63"/>
+				<subreportParameter name="lnCampo1">
+					<subreportParameterExpression><![CDATA[$F{lnCampo1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo2">
+					<subreportParameterExpression><![CDATA[$F{lnCampo2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo3">
+					<subreportParameterExpression><![CDATA[$F{lnCampo3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo4">
+					<subreportParameterExpression><![CDATA[$F{lnCampo4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo10">
+					<subreportParameterExpression><![CDATA[$F{lnCampo10}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo5">
+					<subreportParameterExpression><![CDATA[$F{lnCampo5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="linea">
+					<subreportParameterExpression><![CDATA[$F{linea}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo6">
+					<subreportParameterExpression><![CDATA[$F{lnCampo6}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo7">
+					<subreportParameterExpression><![CDATA[$F{lnCampo7}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo8">
+					<subreportParameterExpression><![CDATA[$F{lnCampo8}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo9">
+					<subreportParameterExpression><![CDATA[$F{lnCampo9}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRMapCollectionDataSource($F{respuesta})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["examenes/quimica/reportes/Examen_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement x="0" y="15" width="572" height="1" uuid="874cd773-b5c0-4d7c-9db2-1f208cd5bbac">
+					<printWhenExpression><![CDATA[new Boolean($F{linea}.intValue() == 1)]]></printWhenExpression>
+				</reportElement>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

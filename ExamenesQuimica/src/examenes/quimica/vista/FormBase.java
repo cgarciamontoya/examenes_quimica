@@ -54,4 +54,9 @@ public class FormBase extends JInternalFrame {
         }
         return false;
     }
+    
+    public boolean confirmarPregunta(String mensaje) {
+        int dialogResult =  JOptionPane.showConfirmDialog(null, mensaje, "Advertencia", JOptionPane.YES_NO_OPTION);
+        return dialogResult == JOptionPane.YES_OPTION;
+    }
 }

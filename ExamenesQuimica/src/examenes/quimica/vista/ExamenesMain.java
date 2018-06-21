@@ -43,6 +43,9 @@ public class ExamenesMain extends javax.swing.JFrame {
         menuPreguntas = new javax.swing.JMenu();
         menuPregAlta = new javax.swing.JMenuItem();
         mnuPregConsulta = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("EXAMENES QUIMICA");
@@ -80,6 +83,26 @@ public class ExamenesMain extends javax.swing.JFrame {
 
         jMenuBar1.add(menuPreguntas);
 
+        jMenu1.setText("Exámenes");
+
+        jMenuItem1.setText("Nuevo");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abrirNuevoExamen(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem3.setText("Consulta");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abrirConsultaExamen(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu1);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -113,6 +136,18 @@ public class ExamenesMain extends javax.swing.JFrame {
         this.add(pcv);
         pcv.show();
     }//GEN-LAST:event_consultaPreguntas
+
+    private void abrirNuevoExamen(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirNuevoExamen
+        ExamenVista ev = new ExamenVista(connection);
+        this.add(ev);
+        ev.show();
+    }//GEN-LAST:event_abrirNuevoExamen
+
+    private void abrirConsultaExamen(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirConsultaExamen
+        ExamenesConsultaVista ecv = new ExamenesConsultaVista(connection);
+        this.add(ecv);
+        ecv.show();
+    }//GEN-LAST:event_abrirConsultaExamen
 
     /**
      * @param args the command line arguments
@@ -150,8 +185,11 @@ public class ExamenesMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenu menuExamenes;
     private javax.swing.JMenuItem menuPregAlta;
     private javax.swing.JMenu menuPreguntas;
