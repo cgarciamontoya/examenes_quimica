@@ -26,7 +26,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
  */
 public class ReportesManager {
     
-    private static final String URL_REPORTES = "D:\\quimica\\";
+    private static final String URL_REPORTES = ConstantesUtil.UNIDAD_RAIZ;
     private static final String RUTA_REPORTES = "/examenes/quimica/reportes/";
     private static final String REPORTE_EXAMEN = "Examen.jasper";
     

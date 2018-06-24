@@ -10,13 +10,14 @@
  */
 package examenes.quimica.db;
 
+import examenes.quimica.util.ConstantesUtil;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class BaseDAO {
 
-    private static final String URL_DB = "jdbc:sqlite:D:\\quimica\\examenes_quimica.db";
+    private static final String URL_DB = "jdbc:sqlite:" + ConstantesUtil.UNIDAD_RAIZ + "examenes_quimica.db";
     private static final String DB_USR = "";
     private static final String DB_PASS = "";
     private static final String JDBC_DRIVER = "org.sqlite.JDBC";

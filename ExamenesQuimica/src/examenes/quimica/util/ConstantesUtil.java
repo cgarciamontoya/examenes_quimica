@@ -22,5 +22,7 @@ public class ConstantesUtil {
     public static final int UNIDAD_EXTRA = 6;
     public static final int UNIDAD_TITULO = 7;
     public static final int UNIDAD_EXTRATITULO = 8;
+    
+    public static final String UNIDAD_RAIZ = "C:\\quimica\\";
 
 }
