@@ -130,62 +130,62 @@
 				<textFieldExpression><![CDATA[$F{campo10}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="15" width="572" height="1" uuid="d009add6-5b7d-41e7-83e4-fa17027bb4f0">
+				<reportElement positionType="Float" x="0" y="15" width="572" height="1" uuid="d009add6-5b7d-41e7-83e4-fa17027bb4f0">
 					<printWhenExpression><![CDATA[new Boolean($P{linea}.intValue() == 1)]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="0" y="0" width="1" height="15" uuid="96c60489-66ee-41de-85f7-dd716ba2de86">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="1" height="15" uuid="96c60489-66ee-41de-85f7-dd716ba2de86">
 					<printWhenExpression><![CDATA[new Boolean($P{lnCampo1}.intValue() == 1 && $P{linea}.intValue() == 1)]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="57" y="0" width="1" height="15" uuid="5955a9d2-5723-4594-846d-110b965ecad6">
+				<reportElement stretchType="RelativeToTallestObject" x="57" y="0" width="1" height="15" uuid="5955a9d2-5723-4594-846d-110b965ecad6">
 					<printWhenExpression><![CDATA[new Boolean($P{lnCampo2}.intValue() == 1 && $P{linea}.intValue() == 1)]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="114" y="0" width="1" height="15" uuid="f7b76d6a-d402-4e08-badf-68ccd2d02f66">
+				<reportElement stretchType="RelativeToTallestObject" x="114" y="0" width="1" height="15" uuid="f7b76d6a-d402-4e08-badf-68ccd2d02f66">
 					<printWhenExpression><![CDATA[new Boolean($P{lnCampo3}.intValue() == 1 && $P{linea}.intValue() == 1)]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="171" y="0" width="1" height="15" uuid="b9cc9b45-0263-464b-bf8d-1a1e0c64c38b">
+				<reportElement stretchType="RelativeToTallestObject" x="171" y="0" width="1" height="15" uuid="b9cc9b45-0263-464b-bf8d-1a1e0c64c38b">
 					<printWhenExpression><![CDATA[new Boolean($P{lnCampo4}.intValue() == 1 && $P{linea}.intValue() == 1)]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="228" y="0" width="1" height="15" uuid="b3087867-6770-48ea-becd-9c43fb50368b">
+				<reportElement stretchType="RelativeToTallestObject" x="228" y="0" width="1" height="15" uuid="b3087867-6770-48ea-becd-9c43fb50368b">
 					<printWhenExpression><![CDATA[new Boolean($P{lnCampo5}.intValue() == 1 && $P{linea}.intValue() == 1)]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="285" y="0" width="1" height="15" uuid="97d85a6b-1fa0-4137-be02-260faf0872bd">
+				<reportElement stretchType="RelativeToTallestObject" x="285" y="0" width="1" height="15" uuid="97d85a6b-1fa0-4137-be02-260faf0872bd">
 					<printWhenExpression><![CDATA[new Boolean($P{lnCampo6}.intValue() == 1 && $P{linea}.intValue() == 1)]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="342" y="0" width="1" height="15" uuid="0c833ade-b4c5-4c28-b9d5-1cecb8722ff8">
+				<reportElement stretchType="RelativeToTallestObject" x="342" y="0" width="1" height="15" uuid="0c833ade-b4c5-4c28-b9d5-1cecb8722ff8">
 					<printWhenExpression><![CDATA[new Boolean($P{lnCampo7}.intValue() == 1 && $P{linea}.intValue() == 1)]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="399" y="0" width="1" height="15" uuid="6b0b29cd-2dac-48dc-b2a1-4ff18e0fd0c9">
+				<reportElement stretchType="RelativeToTallestObject" x="399" y="0" width="1" height="15" uuid="6b0b29cd-2dac-48dc-b2a1-4ff18e0fd0c9">
 					<printWhenExpression><![CDATA[new Boolean($P{lnCampo8}.intValue() == 1 && $P{linea}.intValue() == 1)]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="456" y="0" width="1" height="15" uuid="f8456c01-8a26-490a-8e35-f0facbb93606">
+				<reportElement stretchType="RelativeToTallestObject" x="456" y="0" width="1" height="15" uuid="f8456c01-8a26-490a-8e35-f0facbb93606">
 					<printWhenExpression><![CDATA[new Boolean($P{lnCampo9}.intValue() == 1 && $P{linea}.intValue() == 1)]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="513" y="0" width="1" height="15" uuid="e15a7217-848f-4341-991b-160a0e9d130c">
+				<reportElement stretchType="RelativeToTallestObject" x="513" y="0" width="1" height="15" uuid="e15a7217-848f-4341-991b-160a0e9d130c">
 					<printWhenExpression><![CDATA[new Boolean($P{lnCampo10}.intValue() == 1 && $P{linea}.intValue() == 1)]]></printWhenExpression>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="571" y="0" width="1" height="15" uuid="a6590829-b3e1-49e1-8b56-1bea498245a2">
+				<reportElement stretchType="RelativeToTallestObject" x="571" y="0" width="1" height="15" uuid="a6590829-b3e1-49e1-8b56-1bea498245a2">
 					<printWhenExpression><![CDATA[new Boolean($P{linea}.intValue() == 1)]]></printWhenExpression>
 				</reportElement>
 			</line>
