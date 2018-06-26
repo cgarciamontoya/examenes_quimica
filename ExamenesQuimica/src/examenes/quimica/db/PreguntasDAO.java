@@ -10,6 +10,7 @@ import examenes.quimica.excepciones.ExamenesQuimicaException;
 import examenes.quimica.modelo.CatMateria;
 import examenes.quimica.modelo.CatRespuesta;
 import examenes.quimica.modelo.Pregunta;
+import examenes.quimica.util.ConstantesUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,7 +36,7 @@ public class PreguntasDAO extends BaseDAO {
             if (pregunta.getId() == 0) {
                 sb = "insert into preguntas(pregunta, tipo_respuesta, opciones, materia, unidad) values(?,?,?,?,?)";
             } else {
-                sb = "update preguntas set pregunta = ?, tipo_respuest = ?, opciones = ?, materia = ?, unidad = ? where id = ?";
+                sb = "update preguntas set pregunta = ?, tipo_respuesta = ?, opciones = ?, materia = ?, unidad = ? where id = ?";
             }
             ps = getConnection().prepareStatement(sb);
             ps.setString(1, pregunta.getPregunta());
@@ -71,7 +72,7 @@ public class PreguntasDAO extends BaseDAO {
                             .append(filtros.getMateria().getId())
                             .append(" ");
                 }
-                if (filtros.getUnidad() > 0) {
+                if (filtros.getUnidad() > 0 && filtros.getUnidad() < ConstantesUtil.UNIDAD_ORDINARIO) {
                     sb.append(sb.toString().contains("where") ? "and " : "where ")
                             .append("p.unidad = ")
                             .append(filtros.getUnidad())

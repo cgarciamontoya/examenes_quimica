@@ -38,6 +38,7 @@ public class PreguntasConsultaVista extends FormBase {
         
         List<CatMateria> materias = catalogosDAO.buscarMateria(null);
         DefaultComboBoxModel model = new DefaultComboBoxModel();
+        model.addElement("Seleccione");
         for (CatMateria m : materias) {
             model.addElement(m.toString());
         }
@@ -45,6 +46,7 @@ public class PreguntasConsultaVista extends FormBase {
         
         List<CatRespuesta> respuestas = catalogosDAO.buscarRespuesta(null);
         DefaultComboBoxModel modelRes = new DefaultComboBoxModel();
+        modelRes.addElement("Seleccione");
         for (CatRespuesta res : respuestas) {
             modelRes.addElement(res.toString());
         }

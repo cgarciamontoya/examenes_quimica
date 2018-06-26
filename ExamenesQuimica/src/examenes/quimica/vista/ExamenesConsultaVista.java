@@ -189,7 +189,7 @@ public class ExamenesConsultaVista extends FormBase {
         List<Examen> examenes = examenesDAO.buscarExamen(cboMateria.getSelectedIndex() > 0 ? Integer.parseInt(cboMateria.getSelectedItem().toString().split(" - ")[0]) : 0, 
                 cboUnidad.getSelectedIndex(), txtNombre.getText());
         limpiarTabla(tblExamenes);
-        if (examenes != null) {
+        if (examenes != null && !examenes.isEmpty()) {
             for (Examen e : examenes) {
                 ((DefaultTableModel) tblExamenes.getModel()).addRow(new Object[]{e.getId(), e.getMateria().getNombre(), e.getUnidad(), e.getNombre()});
             }

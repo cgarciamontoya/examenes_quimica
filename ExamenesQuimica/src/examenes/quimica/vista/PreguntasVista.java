@@ -73,7 +73,8 @@ public class PreguntasVista extends FormBase {
             case ConstantesUtil.RESPUESTA_TABLA :
                 String[] renglones = pregunta.getOpciones().split("#");
                 String[] encabezados = renglones[0].split(";");
-                DefaultTableModel modelTable = new DefaultTableModel(encabezados, 0);
+                DefaultTableModel modelTable = new DefaultTableModel(0, encabezados.length);
+                modelTable.addRow(encabezados);
                 for (int i = 1; i < renglones.length; i++) {
                     modelTable.addRow(renglones[i].split(";"));
                 }
@@ -381,7 +382,7 @@ public class PreguntasVista extends FormBase {
             try {
                 preguntasDAO.guardar(pregunta);
                 agregarMensajeExito("La pregunta se guardó correctamente");
-                nuevaPregunta(evt);
+                this.dispose();
             } catch (ExamenesQuimicaException ex) {
                 agregarMensajeError(ex.getMessage());
             }
