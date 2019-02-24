@@ -350,6 +350,14 @@ public class PreguntasVista extends FormBase {
         if (txtOpcion.getText() == null || txtOpcion.getText().isEmpty()) {
             agregarMensajeAdvertencia("El campo Opción es requerido");
             return;
+        } else if (cboRespuesta.getSelectedIndex() == ConstantesUtil.RESPUESTA_ABIERTA ||
+                cboRespuesta.getSelectedIndex() == ConstantesUtil.RESPUESTA_MAPA) {
+            try{
+                Integer.parseInt(txtOpcion.getText());
+            } catch (NumberFormatException nfe) {
+                agregarMensajeAdvertencia("Debe ingresar un valor numérico en las opciones");
+                return;
+            }
         }
         ((DefaultTableModel) tblOpciones.getModel()).addRow(new Object[]{txtOpcion.getText()});
         txtOpcion.setText("");
