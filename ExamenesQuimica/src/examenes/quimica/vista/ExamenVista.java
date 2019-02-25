@@ -14,6 +14,7 @@ import examenes.quimica.modelo.CatRespuesta;
 import examenes.quimica.modelo.Examen;
 import examenes.quimica.modelo.Pregunta;
 import examenes.quimica.reportes.vo.ExamenReporteVO;
+import examenes.quimica.reportes.vo.ExamenVO;
 import examenes.quimica.util.ConstantesUtil;
 import examenes.quimica.util.ReportesManager;
 import java.sql.Connection;
@@ -32,7 +33,7 @@ public class ExamenVista extends FormBase {
 
     private static final long serialVersionUID = 2241099364900823672L;
     
-    private static final String ESPACIO = " ";
+    private static final String ESPACIO = "_";
     private static final String TABULADOR = "\t";
 
     private final CatalogosDAO catalogosDAO;
@@ -409,7 +410,14 @@ public class ExamenVista extends FormBase {
             agregarMensajeAdvertencia("No se han especificado las preguntas del reporte");
             return;
         }
-        List<ExamenReporteVO> preguntas = new ArrayList<>();
+        exportarExamenVO();
+    }//GEN-LAST:event_exportar
+
+    private void exportarExamenVO() {
+        List<ExamenVO> preguntasMain = new ArrayList<>();
+        List<CatRespuesta> tiposRespuesta = catalogosDAO.getTiposRespuesta();
+        
+        List<ExamenReporteVO> preguntas = null;
         Map<Integer, List<ExamenReporteVO>> mapaPreguntas = new HashMap<>();
         for (int i = 0; i < tblPreguntas.getRowCount(); i++) {
             Pregunta p = preguntasDAO.consultaPreguntaId((Integer) tblPreguntas.getValueAt(i, 0));
@@ -421,9 +429,10 @@ public class ExamenVista extends FormBase {
                 case ConstantesUtil.RESPUESTA_ABIERTA:
                 case ConstantesUtil.RESPUESTA_MAPA:
                     int numRen = Integer.parseInt(p.getOpciones().split(";")[0]);
+                    ervo.setNoCampos(1);
                     Map<String, String> mapa = new HashMap<>();
                     for (int nr = 0; nr < numRen; nr++) {
-                        mapa.put("campo1", ESPACIO);
+                        mapa.put("campo1", " ");
                         respuesta.add(mapa);
                     }
                     break;
@@ -431,7 +440,8 @@ public class ExamenVista extends FormBase {
                     respuesta.add(generarMapa(p.getOpciones().split(";"), ervo));
                     break;
                 case ConstantesUtil.RESPUESTA_TABLA:
-                    linea = 1;
+                case ConstantesUtil.RESPUESTA_RELACIONAR:  
+                    linea = p.getTipoRespuesta().getId() == ConstantesUtil.RESPUESTA_TABLA ? 1 : 0;
                     String[] renglones = p.getOpciones().split("#");
                     String[] encabezados = renglones[0].split(";");
                     respuesta.add(generarMapa(encabezados, ervo));
@@ -447,12 +457,43 @@ public class ExamenVista extends FormBase {
             }
             mapaPreguntas.get(p.getTipoRespuesta().getId()).add(ervo);
         }
+        int idxIns = 1;
         for (Integer key : mapaPreguntas.keySet()) {
+            ExamenVO vo = new ExamenVO();
+            String instrucciones = "";
+            for (CatRespuesta tr : tiposRespuesta) {
+                if (key.equals(tr.getId())) {
+                    switch (idxIns) {
+                        case 1 : 
+                            instrucciones = "I. ";
+                            break;
+                        case 2 :
+                            instrucciones = "II. ";
+                            break;
+                        case 3 :
+                            instrucciones = "III. ";
+                            break;
+                        case 4 :
+                            instrucciones = "IV. ";
+                            break;
+                        case 5 :
+                            instrucciones = "V. ";
+                            break;
+                    }
+                    instrucciones += tr.getDescripcion();
+                    break;
+                }
+            }
+            vo.setInstrucciones(instrucciones);
+            preguntas = new ArrayList<>();
             preguntas.addAll(mapaPreguntas.get(key));
-        }
-        int idx = 1;
-        for (ExamenReporteVO vo : preguntas) {
-            vo.setPregunta(idx++ + ". " + vo.getPregunta());
+            int idx = 1;
+            for (ExamenReporteVO ervo : preguntas) {
+                ervo.setPregunta(idx++ + ". " + ervo.getPregunta());
+            }
+            vo.setPreguntas(preguntas);
+            preguntasMain.add(vo);
+            idxIns++;
         }
         try {
             String nombre = "";
@@ -461,55 +502,19 @@ public class ExamenVista extends FormBase {
             } else {
                 nombre = txtNombre.getText();
             }
-            reportesManager.generarExamen(cboMateria.getSelectedItem().toString().split(" - ")[1], 
-                    nombre, preguntas);
+            reportesManager.generarExamenInstrucciones(cboMateria.getSelectedItem().toString().split(" - ")[1], 
+                    nombre, preguntasMain);
         } catch(ExamenesQuimicaException ex) {
             agregarMensajeError(ex.getMessage());
         }
-    }//GEN-LAST:event_exportar
-
+    }
     private Map<String, String> generarMapa(String[] datos, ExamenReporteVO ervo) {
+        ervo.setNoCampos(datos.length);
         Map<String, String> mapa = new HashMap<>();
-        int cc = 1;
         int index = 1;
-        if (datos.length <= 5) {
-            cc = 10 / datos.length;
-        }
         for (String d : datos) {
             mapa.put("campo" + index, d);
-            switch (index) {
-                case 1:
-                    ervo.setLnCampo1(1);
-                    break;
-                case 2:
-                    ervo.setLnCampo2(1);
-                    break;
-                case 3:
-                    ervo.setLnCampo3(1);
-                    break;
-                case 4:
-                    ervo.setLnCampo4(1);
-                    break;
-                case 5:
-                    ervo.setLnCampo5(1);
-                    break;
-                case 6:
-                    ervo.setLnCampo6(1);
-                    break;
-                case 7:
-                    ervo.setLnCampo7(1);
-                    break;
-                case 8:
-                    ervo.setLnCampo8(1);
-                    break;
-                case 9:
-                    ervo.setLnCampo9(1);
-                    break;
-                case 10:
-                    ervo.setLnCampo10(1);
-                    break;
-            }
-            index += cc;
+            index++;
         }
         return mapa;
     }

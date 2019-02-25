@@ -14,13 +14,20 @@ public class CatRespuesta {
 
     private int id;
     private String nombre;
+    private String descripcion;
 
     public CatRespuesta() {
     }
-    
+
     public CatRespuesta(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
+    }
+    
+    public CatRespuesta(int id, String nombre, String descripcion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
     }
 
     public int getId() {
@@ -39,6 +46,14 @@ public class CatRespuesta {
         this.nombre = nombre;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
     @Override
     public String toString() {
         return id + " - " + nombre;

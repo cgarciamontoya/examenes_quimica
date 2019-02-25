@@ -99,18 +99,30 @@ public class CatalogosDAO extends BaseDAO {
     public List<CatRespuesta> buscarRespuesta(String nombre) {
         try {
             StringBuilder sb = new StringBuilder();
-            sb.append("select id, nombre from cat_respuestas ");
+            sb.append("select id, nombre, descripcion from cat_respuestas ");
             if (nombre != null && !nombre.trim().isEmpty()) {
                 sb.append("where nombre like '")
                         .append(nombre.toUpperCase())
                         .append("%' ");
-            }
-            sb.append("order by nombre");
+            };
             
             ResultSet rs = getConnection().prepareStatement(sb.toString()).executeQuery();
             List<CatRespuesta> res = new ArrayList<>();
             while (rs.next()) {
-                res.add(new CatRespuesta(rs.getInt("id"), rs.getString("nombre")));
+                res.add(new CatRespuesta(rs.getInt("id"), rs.getString("nombre"), rs.getString("descripcion")));
+            }
+            return res;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    
+    public List<CatRespuesta> getTiposRespuesta() {
+        try {
+            ResultSet rs = getConnection().prepareStatement("select id, nombre, descripcion from cat_respuestas").executeQuery();
+            List<CatRespuesta> res = new ArrayList<>();
+            while (rs.next()) {
+                res.add(new CatRespuesta(rs.getInt("id"), rs.getString("nombre"), rs.getString("descripcion")));
             }
             return res;
         } catch (SQLException ex) {

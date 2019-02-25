@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Examen_srmain" pageWidth="572" pageHeight="752" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="603d7879-5c8b-40eb-a31e-2d9acec6ef0a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["lmfvgo/reportes/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="escudo" class="java.io.InputStream"/>
+	<parameter name="nombre" class="java.lang.String"/>
+	<parameter name="materia" class="java.lang.String"/>
+	<field name="pregunta" class="java.lang.String"/>
+	<field name="respuesta" class="java.util.List"/>
+	<field name="linea" class="java.lang.Integer"/>
+	<field name="lnCampo1" class="java.lang.Integer"/>
+	<field name="lnCampo2" class="java.lang.Integer"/>
+	<field name="lnCampo3" class="java.lang.Integer"/>
+	<field name="lnCampo4" class="java.lang.Integer"/>
+	<field name="lnCampo5" class="java.lang.Integer"/>
+	<field name="lnCampo6" class="java.lang.Integer"/>
+	<field name="lnCampo7" class="java.lang.Integer"/>
+	<field name="lnCampo8" class="java.lang.Integer"/>
+	<field name="lnCampo9" class="java.lang.Integer"/>
+	<field name="lnCampo10" class="java.lang.Integer"/>
+	<field name="noCampos" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="166">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="571" height="15" uuid="0fa64e07-68d1-46f3-a232-3c942b1a3f37"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pregunta}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="31" width="571" height="15" isRemoveLineWhenBlank="true" uuid="54c71479-20cd-4414-9925-590d19f84b63">
+					<printWhenExpression><![CDATA[new Boolean($F{noCampos}.intValue() == 2)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="lnCampo1">
+					<subreportParameterExpression><![CDATA[$F{lnCampo1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo2">
+					<subreportParameterExpression><![CDATA[$F{lnCampo2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo3">
+					<subreportParameterExpression><![CDATA[$F{lnCampo3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo4">
+					<subreportParameterExpression><![CDATA[$F{lnCampo4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo10">
+					<subreportParameterExpression><![CDATA[$F{lnCampo10}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo5">
+					<subreportParameterExpression><![CDATA[$F{lnCampo5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="linea">
+					<subreportParameterExpression><![CDATA[$F{linea}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo6">
+					<subreportParameterExpression><![CDATA[$F{lnCampo6}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo7">
+					<subreportParameterExpression><![CDATA[$F{lnCampo7}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo8">
+					<subreportParameterExpression><![CDATA[$F{lnCampo8}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo9">
+					<subreportParameterExpression><![CDATA[$F{lnCampo9}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRMapCollectionDataSource($F{respuesta})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["examenes/quimica/reportes/Examen_subreport2.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement x="0" y="15" width="572" height="1" uuid="874cd773-b5c0-4d7c-9db2-1f208cd5bbac">
+					<printWhenExpression><![CDATA[new Boolean($F{linea}.intValue() == 1)]]></printWhenExpression>
+				</reportElement>
+			</line>
+			<subreport>
+				<reportElement x="0" y="46" width="571" height="15" isRemoveLineWhenBlank="true" uuid="b669c1af-140e-4a92-8d7f-c3ad52390166">
+					<printWhenExpression><![CDATA[new Boolean($F{noCampos}.intValue() == 3)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="lnCampo1">
+					<subreportParameterExpression><![CDATA[$F{lnCampo1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo2">
+					<subreportParameterExpression><![CDATA[$F{lnCampo2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo3">
+					<subreportParameterExpression><![CDATA[$F{lnCampo3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="linea">
+					<subreportParameterExpression><![CDATA[$F{linea}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRMapCollectionDataSource($F{respuesta})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["examenes/quimica/reportes/Examen_subreport3.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="61" width="571" height="15" isRemoveLineWhenBlank="true" uuid="440d92fa-fb68-4d5c-be4d-8c81f975dada">
+					<printWhenExpression><![CDATA[new Boolean($F{noCampos}.intValue() == 4)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="lnCampo1">
+					<subreportParameterExpression><![CDATA[$F{lnCampo1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo2">
+					<subreportParameterExpression><![CDATA[$F{lnCampo2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo3">
+					<subreportParameterExpression><![CDATA[$F{lnCampo3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo4">
+					<subreportParameterExpression><![CDATA[$F{lnCampo4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="linea">
+					<subreportParameterExpression><![CDATA[$F{linea}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRMapCollectionDataSource($F{respuesta})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["examenes/quimica/reportes/Examen_subreport4.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="16" width="571" height="15" isRemoveLineWhenBlank="true" uuid="e1cb4244-f794-4939-aca9-50f4b7d60b04">
+					<printWhenExpression><![CDATA[new Boolean($F{noCampos}.intValue() == 1)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="lnCampo1">
+					<subreportParameterExpression><![CDATA[$F{lnCampo1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo2">
+					<subreportParameterExpression><![CDATA[$F{lnCampo2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="linea">
+					<subreportParameterExpression><![CDATA[$F{linea}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRMapCollectionDataSource($F{respuesta})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["examenes/quimica/reportes/Examen_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="76" width="571" height="15" isRemoveLineWhenBlank="true" uuid="c2c1196d-af85-4aa3-9ae0-0b78ae95d2ed">
+					<printWhenExpression><![CDATA[new Boolean($F{noCampos}.intValue() == 5)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="lnCampo1">
+					<subreportParameterExpression><![CDATA[$F{lnCampo1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo2">
+					<subreportParameterExpression><![CDATA[$F{lnCampo2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo3">
+					<subreportParameterExpression><![CDATA[$F{lnCampo3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo4">
+					<subreportParameterExpression><![CDATA[$F{lnCampo4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo5">
+					<subreportParameterExpression><![CDATA[$F{lnCampo5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="linea">
+					<subreportParameterExpression><![CDATA[$F{linea}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo6">
+					<subreportParameterExpression><![CDATA[$F{lnCampo6}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRMapCollectionDataSource($F{respuesta})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["examenes/quimica/reportes/Examen_subreport5.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="91" width="571" height="15" isRemoveLineWhenBlank="true" uuid="bf392ad4-c3be-4560-a068-332e829ec4ec">
+					<printWhenExpression><![CDATA[new Boolean($F{noCampos}.intValue() == 6)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="lnCampo1">
+					<subreportParameterExpression><![CDATA[$F{lnCampo1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo2">
+					<subreportParameterExpression><![CDATA[$F{lnCampo2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo3">
+					<subreportParameterExpression><![CDATA[$F{lnCampo3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo4">
+					<subreportParameterExpression><![CDATA[$F{lnCampo4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo5">
+					<subreportParameterExpression><![CDATA[$F{lnCampo5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="linea">
+					<subreportParameterExpression><![CDATA[$F{linea}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo6">
+					<subreportParameterExpression><![CDATA[$F{lnCampo6}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo7">
+					<subreportParameterExpression><![CDATA[$F{lnCampo7}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRMapCollectionDataSource($F{respuesta})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["examenes/quimica/reportes/Examen_subreport6.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="106" width="571" height="15" isRemoveLineWhenBlank="true" uuid="5f0f7974-9128-4b02-b77f-ddf6c8735335">
+					<printWhenExpression><![CDATA[new Boolean($F{noCampos}.intValue() == 7)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="lnCampo1">
+					<subreportParameterExpression><![CDATA[$F{lnCampo1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo2">
+					<subreportParameterExpression><![CDATA[$F{lnCampo2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo3">
+					<subreportParameterExpression><![CDATA[$F{lnCampo3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo4">
+					<subreportParameterExpression><![CDATA[$F{lnCampo4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo5">
+					<subreportParameterExpression><![CDATA[$F{lnCampo5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="linea">
+					<subreportParameterExpression><![CDATA[$F{linea}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo6">
+					<subreportParameterExpression><![CDATA[$F{lnCampo6}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo7">
+					<subreportParameterExpression><![CDATA[$F{lnCampo7}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo8">
+					<subreportParameterExpression><![CDATA[$F{lnCampo8}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRMapCollectionDataSource($F{respuesta})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["examenes/quimica/reportes/Examen_subreport7.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="121" width="571" height="15" isRemoveLineWhenBlank="true" uuid="064efd26-07a2-45b7-8634-23cdb301a291">
+					<printWhenExpression><![CDATA[new Boolean($F{noCampos}.intValue() == 8)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="lnCampo1">
+					<subreportParameterExpression><![CDATA[$F{lnCampo1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo2">
+					<subreportParameterExpression><![CDATA[$F{lnCampo2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo3">
+					<subreportParameterExpression><![CDATA[$F{lnCampo3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo4">
+					<subreportParameterExpression><![CDATA[$F{lnCampo4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo5">
+					<subreportParameterExpression><![CDATA[$F{lnCampo5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="linea">
+					<subreportParameterExpression><![CDATA[$F{linea}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo6">
+					<subreportParameterExpression><![CDATA[$F{lnCampo6}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo7">
+					<subreportParameterExpression><![CDATA[$F{lnCampo7}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo8">
+					<subreportParameterExpression><![CDATA[$F{lnCampo8}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo9">
+					<subreportParameterExpression><![CDATA[$F{lnCampo9}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRMapCollectionDataSource($F{respuesta})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["examenes/quimica/reportes/Examen_subreport8.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="136" width="571" height="15" isRemoveLineWhenBlank="true" uuid="d2fcbed7-8325-40de-95c3-fba18016b9b8">
+					<printWhenExpression><![CDATA[new Boolean($F{noCampos}.intValue() == 9)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="lnCampo1">
+					<subreportParameterExpression><![CDATA[$F{lnCampo1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo2">
+					<subreportParameterExpression><![CDATA[$F{lnCampo2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo3">
+					<subreportParameterExpression><![CDATA[$F{lnCampo3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo4">
+					<subreportParameterExpression><![CDATA[$F{lnCampo4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo5">
+					<subreportParameterExpression><![CDATA[$F{lnCampo5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="linea">
+					<subreportParameterExpression><![CDATA[$F{linea}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo6">
+					<subreportParameterExpression><![CDATA[$F{lnCampo6}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo7">
+					<subreportParameterExpression><![CDATA[$F{lnCampo7}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo8">
+					<subreportParameterExpression><![CDATA[$F{lnCampo8}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo9">
+					<subreportParameterExpression><![CDATA[$F{lnCampo9}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo10">
+					<subreportParameterExpression><![CDATA[$F{lnCampo10}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRMapCollectionDataSource($F{respuesta})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["examenes/quimica/reportes/Examen_subreport9.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="151" width="571" height="15" isRemoveLineWhenBlank="true" uuid="6f2f34d4-7591-49ac-929e-b2e1e57d6bfe">
+					<printWhenExpression><![CDATA[new Boolean($F{noCampos}.intValue() == 10)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="lnCampo1">
+					<subreportParameterExpression><![CDATA[$F{lnCampo1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo2">
+					<subreportParameterExpression><![CDATA[$F{lnCampo2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo3">
+					<subreportParameterExpression><![CDATA[$F{lnCampo3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo4">
+					<subreportParameterExpression><![CDATA[$F{lnCampo4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo5">
+					<subreportParameterExpression><![CDATA[$F{lnCampo5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="linea">
+					<subreportParameterExpression><![CDATA[$F{linea}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo6">
+					<subreportParameterExpression><![CDATA[$F{lnCampo6}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo7">
+					<subreportParameterExpression><![CDATA[$F{lnCampo7}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo8">
+					<subreportParameterExpression><![CDATA[$F{lnCampo8}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo9">
+					<subreportParameterExpression><![CDATA[$F{lnCampo9}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lnCampo10">
+					<subreportParameterExpression><![CDATA[$F{lnCampo10}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRMapCollectionDataSource($F{respuesta})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["examenes/quimica/reportes/Examen_subreport10.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

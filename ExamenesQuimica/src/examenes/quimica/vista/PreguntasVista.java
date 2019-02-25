@@ -70,6 +70,7 @@ public class PreguntasVista extends FormBase {
                     ((DefaultTableModel) tblOpciones.getModel()).addRow(new Object[]{op});
                 }
                 break;
+            case ConstantesUtil.RESPUESTA_RELACIONAR :
             case ConstantesUtil.RESPUESTA_TABLA :
                 String[] renglones = pregunta.getOpciones().split("#");
                 String[] encabezados = renglones[0].split(";");
@@ -371,7 +372,8 @@ public class PreguntasVista extends FormBase {
             pregunta.getTipoRespuesta().setId(cboRespuesta.getSelectedIndex());
             if (pregunta.getTipoRespuesta().getId() != ConstantesUtil.RESPUESTA_COMPLEMENTAR) {
                 String opcs = "";
-                if (pregunta.getTipoRespuesta().getId() == ConstantesUtil.RESPUESTA_TABLA) {
+                if (pregunta.getTipoRespuesta().getId() == ConstantesUtil.RESPUESTA_TABLA ||
+                        pregunta.getTipoRespuesta().getId() == ConstantesUtil.RESPUESTA_RELACIONAR) {
                     for (int i = 0; i < tblOpciones.getRowCount(); i++) {
                         for (int j = 0; j < tblOpciones.getColumnCount(); j++) {
                             opcs += (tblOpciones.getValueAt(i, j) != null ? 
@@ -455,13 +457,27 @@ public class PreguntasVista extends FormBase {
     private void configTipoRespuesta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configTipoRespuesta
         limpiarTabla(tblOpciones);
         txtRens.setText(null);
-        txtRens.setEnabled(cboRespuesta.getSelectedIndex() == ConstantesUtil.RESPUESTA_TABLA);
-        txtCols.setEnabled(cboRespuesta.getSelectedIndex() == ConstantesUtil.RESPUESTA_TABLA);
-        btnAgregar.setEnabled(cboRespuesta.getSelectedIndex() != ConstantesUtil.RESPUESTA_TABLA);
-        txtOpcion.setEnabled(cboRespuesta.getSelectedIndex() != ConstantesUtil.RESPUESTA_TABLA);
-        btnLimpiarTbl.setEnabled(cboRespuesta.getSelectedIndex() == ConstantesUtil.RESPUESTA_TABLA);
-        btnTabla.setEnabled(cboRespuesta.getSelectedIndex() == ConstantesUtil.RESPUESTA_TABLA);
-        if (cboRespuesta.getSelectedIndex() != ConstantesUtil.RESPUESTA_TABLA) {
+        txtRens.setEnabled(cboRespuesta.getSelectedIndex() == ConstantesUtil.RESPUESTA_TABLA ||
+                cboRespuesta.getSelectedIndex() == ConstantesUtil.RESPUESTA_RELACIONAR);
+        txtCols.setEnabled(cboRespuesta.getSelectedIndex() == ConstantesUtil.RESPUESTA_TABLA ||
+                cboRespuesta.getSelectedIndex() == ConstantesUtil.RESPUESTA_RELACIONAR);
+        if (cboRespuesta.getSelectedIndex() == ConstantesUtil.RESPUESTA_RELACIONAR) {
+            txtCols.setText("2");
+            txtCols.setEnabled(false);
+        }
+        else if (cboRespuesta.getSelectedIndex() == ConstantesUtil.RESPUESTA_TABLA){
+            txtCols.setEnabled(true);
+        }
+        btnAgregar.setEnabled(cboRespuesta.getSelectedIndex() != ConstantesUtil.RESPUESTA_TABLA &&
+                cboRespuesta.getSelectedIndex() != ConstantesUtil.RESPUESTA_RELACIONAR);
+        txtOpcion.setEnabled(cboRespuesta.getSelectedIndex() != ConstantesUtil.RESPUESTA_TABLA &&
+                cboRespuesta.getSelectedIndex() != ConstantesUtil.RESPUESTA_RELACIONAR);
+        btnLimpiarTbl.setEnabled(cboRespuesta.getSelectedIndex() == ConstantesUtil.RESPUESTA_TABLA ||
+                cboRespuesta.getSelectedIndex() == ConstantesUtil.RESPUESTA_RELACIONAR);
+        btnTabla.setEnabled(cboRespuesta.getSelectedIndex() == ConstantesUtil.RESPUESTA_TABLA ||
+                cboRespuesta.getSelectedIndex() == ConstantesUtil.RESPUESTA_RELACIONAR);
+        if (cboRespuesta.getSelectedIndex() != ConstantesUtil.RESPUESTA_TABLA &&
+                cboRespuesta.getSelectedIndex() != ConstantesUtil.RESPUESTA_RELACIONAR) {
             initTabla();
         }
     }//GEN-LAST:event_configTipoRespuesta

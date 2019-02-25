@@ -8,6 +8,7 @@ package examenes.quimica.util;
 
 import examenes.quimica.excepciones.ExamenesQuimicaException;
 import examenes.quimica.reportes.vo.ExamenReporteVO;
+import examenes.quimica.reportes.vo.ExamenVO;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,6 +33,16 @@ public class ReportesManager {
     
 
     public ReportesManager(Connection con) {
+    }
+    
+    public void generarExamenInstrucciones(String materia, String nombre, List<ExamenVO> examenReporte) throws ExamenesQuimicaException {
+        Map<String, Object> parametros = new HashMap<>();
+        getLogos(parametros);
+        parametros.put("nombre", nombre);
+        parametros.put("materia", materia);
+        String nombrePdf = URL_REPORTES + nombre + ".pdf";
+        exportar(RUTA_REPORTES + REPORTE_EXAMEN, parametros, nombrePdf, examenReporte);
+        abrirPdf(nombrePdf);
     }
     
     public void generarExamen(String materia, String nombre, List<ExamenReporteVO> examenReporte) throws ExamenesQuimicaException {

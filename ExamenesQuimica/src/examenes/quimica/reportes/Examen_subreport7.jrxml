@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Examen_subreport10" pageWidth="572" pageHeight="752" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4d539467-afc6-4ffd-8f05-51b2350b8ec0">
+	<property name="ireport.zoom" value="5.559917313492239"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="linea" class="java.lang.Integer"/>
+	<field name="campo1" class="java.lang.String"/>
+	<field name="campo2" class="java.lang.String"/>
+	<field name="campo3" class="java.lang.String"/>
+	<field name="campo4" class="java.lang.String"/>
+	<field name="campo5" class="java.lang.String"/>
+	<field name="campo6" class="java.lang.String"/>
+	<field name="campo7" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="1" y="0" width="84" height="15" uuid="d0608f68-657d-46f1-b4e1-e8b0495b71ff"/>
+				<box leftPadding="1" rightPadding="1">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{campo1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="86" y="0" width="80" height="15" uuid="c24ab9d0-57cb-4f92-bdf1-98fbb9cb00a9"/>
+				<box leftPadding="1" rightPadding="1">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{campo2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="167" y="0" width="80" height="15" uuid="eb49bdc9-ffd3-4eca-a4d7-247ef069118a"/>
+				<box leftPadding="1" rightPadding="1">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{campo3}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="248" y="0" width="80" height="15" uuid="e7407375-2ad0-4b98-a5a2-474d16b21664"/>
+				<box leftPadding="1" rightPadding="1">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{campo4}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="329" y="0" width="80" height="15" uuid="ea111919-9d2d-4efd-857b-babc50e79abd"/>
+				<box leftPadding="1" rightPadding="1">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{campo5}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="410" y="0" width="80" height="15" uuid="21d213a9-2bad-4482-996d-f2fd50150803"/>
+				<box leftPadding="1" rightPadding="1">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{campo6}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="491" y="0" width="80" height="15" uuid="7a718a3a-1fdf-4d88-b4fe-4e9d8033dbcf"/>
+				<box leftPadding="1" rightPadding="1">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{campo7}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="0" y="15" width="572" height="1" uuid="d009add6-5b7d-41e7-83e4-fa17027bb4f0">
+					<printWhenExpression><![CDATA[new Boolean($P{linea}.intValue() == 1)]]></printWhenExpression>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="1" height="15" uuid="96c60489-66ee-41de-85f7-dd716ba2de86">
+					<printWhenExpression><![CDATA[new Boolean($P{linea}.intValue() == 1)]]></printWhenExpression>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToTallestObject" x="85" y="0" width="1" height="15" uuid="5955a9d2-5723-4594-846d-110b965ecad6">
+					<printWhenExpression><![CDATA[new Boolean($P{linea}.intValue() == 1)]]></printWhenExpression>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToTallestObject" x="166" y="0" width="1" height="15" uuid="f7b76d6a-d402-4e08-badf-68ccd2d02f66">
+					<printWhenExpression><![CDATA[new Boolean($P{linea}.intValue() == 1)]]></printWhenExpression>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToTallestObject" x="247" y="0" width="1" height="15" uuid="b9cc9b45-0263-464b-bf8d-1a1e0c64c38b">
+					<printWhenExpression><![CDATA[new Boolean($P{linea}.intValue() == 1)]]></printWhenExpression>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToTallestObject" x="328" y="0" width="1" height="15" uuid="b3087867-6770-48ea-becd-9c43fb50368b">
+					<printWhenExpression><![CDATA[new Boolean($P{linea}.intValue() == 1)]]></printWhenExpression>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToTallestObject" x="409" y="0" width="1" height="15" uuid="97d85a6b-1fa0-4137-be02-260faf0872bd">
+					<printWhenExpression><![CDATA[new Boolean($P{linea}.intValue() == 1)]]></printWhenExpression>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToTallestObject" x="490" y="0" width="1" height="15" uuid="0c833ade-b4c5-4c28-b9d5-1cecb8722ff8">
+					<printWhenExpression><![CDATA[new Boolean($P{linea}.intValue() == 1)]]></printWhenExpression>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToTallestObject" x="571" y="0" width="1" height="15" uuid="6b0b29cd-2dac-48dc-b2a1-4ff18e0fd0c9">
+					<printWhenExpression><![CDATA[new Boolean($P{linea}.intValue() == 1)]]></printWhenExpression>
+				</reportElement>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

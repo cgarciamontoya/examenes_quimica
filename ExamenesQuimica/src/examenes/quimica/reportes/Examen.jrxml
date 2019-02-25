@@ -10,19 +10,9 @@
 	<parameter name="escudo" class="java.io.InputStream"/>
 	<parameter name="nombre" class="java.lang.String"/>
 	<parameter name="materia" class="java.lang.String"/>
-	<field name="pregunta" class="java.lang.String"/>
-	<field name="respuesta" class="java.util.List"/>
+	<field name="instrucciones" class="java.lang.String"/>
+	<field name="preguntas" class="java.util.List"/>
 	<field name="linea" class="java.lang.Integer"/>
-	<field name="lnCampo1" class="java.lang.Integer"/>
-	<field name="lnCampo2" class="java.lang.Integer"/>
-	<field name="lnCampo3" class="java.lang.Integer"/>
-	<field name="lnCampo4" class="java.lang.Integer"/>
-	<field name="lnCampo5" class="java.lang.Integer"/>
-	<field name="lnCampo6" class="java.lang.Integer"/>
-	<field name="lnCampo7" class="java.lang.Integer"/>
-	<field name="lnCampo8" class="java.lang.Integer"/>
-	<field name="lnCampo9" class="java.lang.Integer"/>
-	<field name="lnCampo10" class="java.lang.Integer"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -99,47 +89,14 @@
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="0" y="0" width="571" height="15" uuid="0fa64e07-68d1-46f3-a232-3c942b1a3f37"/>
 				<textElement verticalAlignment="Middle">
-					<font size="8"/>
+					<font size="8" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{pregunta}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{instrucciones}]]></textFieldExpression>
 			</textField>
 			<subreport>
 				<reportElement x="0" y="16" width="571" height="15" uuid="54c71479-20cd-4414-9925-590d19f84b63"/>
-				<subreportParameter name="lnCampo1">
-					<subreportParameterExpression><![CDATA[$F{lnCampo1}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="lnCampo2">
-					<subreportParameterExpression><![CDATA[$F{lnCampo2}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="lnCampo3">
-					<subreportParameterExpression><![CDATA[$F{lnCampo3}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="lnCampo4">
-					<subreportParameterExpression><![CDATA[$F{lnCampo4}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="lnCampo10">
-					<subreportParameterExpression><![CDATA[$F{lnCampo10}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="lnCampo5">
-					<subreportParameterExpression><![CDATA[$F{lnCampo5}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="linea">
-					<subreportParameterExpression><![CDATA[$F{linea}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="lnCampo6">
-					<subreportParameterExpression><![CDATA[$F{lnCampo6}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="lnCampo7">
-					<subreportParameterExpression><![CDATA[$F{lnCampo7}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="lnCampo8">
-					<subreportParameterExpression><![CDATA[$F{lnCampo8}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="lnCampo9">
-					<subreportParameterExpression><![CDATA[$F{lnCampo9}]]></subreportParameterExpression>
-				</subreportParameter>
-				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRMapCollectionDataSource($F{respuesta})]]></dataSourceExpression>
-				<subreportExpression><![CDATA["examenes/quimica/reportes/Examen_subreport1.jasper"]]></subreportExpression>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{preguntas})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["examenes/quimica/reportes/Examen_srmain.jasper"]]></subreportExpression>
 			</subreport>
 			<line>
 				<reportElement x="0" y="15" width="572" height="1" uuid="874cd773-b5c0-4d7c-9db2-1f208cd5bbac">
