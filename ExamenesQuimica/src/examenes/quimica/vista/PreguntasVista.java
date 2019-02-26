@@ -488,7 +488,10 @@ public class PreguntasVista extends FormBase {
                     txtRens.getText() != null && !txtRens.getText().isEmpty()) {
                 int cols = Integer.parseInt(txtCols.getText());
                 int rens = Integer.parseInt(txtRens.getText());
-                
+                if (cols > 10) {
+                    agregarMensajeAdvertencia("No se permite agregar mas de 10 columnas");
+                    return;
+                }
                 tblOpciones.setModel(new DefaultTableModel(new String[cols], rens));
             }
         } catch (NumberFormatException ex) {

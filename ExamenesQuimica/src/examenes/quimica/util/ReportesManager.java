@@ -9,17 +9,21 @@ package examenes.quimica.util;
 import examenes.quimica.excepciones.ExamenesQuimicaException;
 import examenes.quimica.reportes.vo.ExamenReporteVO;
 import examenes.quimica.reportes.vo.ExamenVO;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JRSaveContributor;
+import net.sf.jasperreports.view.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
+import net.sf.jasperreports.view.save.JRPdfSaveContributor;
 
 /**
  * Descripcion:
@@ -40,19 +44,9 @@ public class ReportesManager {
         getLogos(parametros);
         parametros.put("nombre", nombre);
         parametros.put("materia", materia);
-        String nombrePdf = URL_REPORTES + nombre + ".pdf";
+        String nombrePdf = nombre + ".pdf";
         exportar(RUTA_REPORTES + REPORTE_EXAMEN, parametros, nombrePdf, examenReporte);
-        abrirPdf(nombrePdf);
-    }
-    
-    public void generarExamen(String materia, String nombre, List<ExamenReporteVO> examenReporte) throws ExamenesQuimicaException {
-        Map<String, Object> parametros = new HashMap<>();
-        getLogos(parametros);
-        parametros.put("nombre", nombre);
-        parametros.put("materia", materia);
-        String nombrePdf = URL_REPORTES + nombre + ".pdf";
-        exportar(RUTA_REPORTES + REPORTE_EXAMEN, parametros, nombrePdf, examenReporte);
-        abrirPdf(nombrePdf);
+        //abrirPdf(nombrePdf);
     }
     
     private void getLogos(Map<String, Object> parametros) {
@@ -72,9 +66,16 @@ public class ReportesManager {
         try {
             InputStream reporte = ReportesManager.class.getResourceAsStream(nombreReporte);
             JasperPrint jp = (JasperPrint) JasperFillManager.fillReport(reporte, parametros, new JRBeanCollectionDataSource(detalle));
-            File archivo = new File(nombrePdf);
+            JasperViewer jv = new JasperViewer(jp, false);
+            Field jrViewerField = jv.getClass().getDeclaredField("viewer");
+            jrViewerField.setAccessible(true);
+            JRViewer jrViewer = (JRViewer) jrViewerField.get(jv);
+            jrViewer.setSaveContributors(new JRSaveContributor[]{new JRPdfSaveContributor(Locale.getDefault(), null)});
+            jv.setTitle(nombrePdf);
+            jv.setVisible(true);
+            /*File archivo = new File(nombrePdf);
             archivo.createNewFile();
-            JasperExportManager.exportReportToPdfFile(jp, nombrePdf);
+            JasperExportManager.exportReportToPdfFile(jp, nombrePdf);*/
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new ExamenesQuimicaException("No se pudo generar el reporte debido a: " + ex.getMessage());
