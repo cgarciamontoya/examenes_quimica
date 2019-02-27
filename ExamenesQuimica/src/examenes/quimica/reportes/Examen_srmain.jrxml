@@ -34,7 +34,7 @@
 			</line>
 			<subreport>
 				<reportElement x="0" y="16" width="571" height="15" isRemoveLineWhenBlank="true" uuid="e1cb4244-f794-4939-aca9-50f4b7d60b04">
-					<printWhenExpression><![CDATA[new Boolean($F{noCampos}.intValue() == 1)]]></printWhenExpression>
+					<printWhenExpression><![CDATA[new Boolean($F{noCampos}.intValue() == 1 && !$F{respuesta}.isEmpty())]]></printWhenExpression>
 				</reportElement>
 				<subreportParameter name="linea">
 					<subreportParameterExpression><![CDATA[$F{linea}]]></subreportParameterExpression>

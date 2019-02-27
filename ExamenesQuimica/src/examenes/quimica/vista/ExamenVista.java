@@ -448,6 +448,9 @@ public class ExamenVista extends FormBase {
                     for (int rr = 1; rr < renglones.length; rr++) {
                         respuesta.add(generarMapa(renglones[rr].split(";"), ervo));
                     }
+                    break;
+                case ConstantesUtil.RESPUESTA_COMPLEMENTAR:
+                    ervo.setNoCampos(1);
             }
             
             ervo.setRespuesta(respuesta);
